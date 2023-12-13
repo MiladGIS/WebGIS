@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <title>signup page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+        integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+</head>
+
+<body style="background-image: url({{url_for('static', filename='bg.png')}});background-repeat: no-repeat;
+            background-attachment: fixed; background-size: 100% 105%;">
+    <div style=" margin: auto;text-align: center; margin-top: 10%;
+        display:table; background-color:rgba(255, 25, 221, 0.9); padding: 1%;">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class="w3-panel w3-yellow w3-round" style="display:inline-block;">
+            {{ messages[0]}}
+        </div>
+        {% endif %} {% endwith %}
+        <br>
+        <!-- add form to login page with jinja engine-->
+        <form method="POST" class="pure-form pure-form-aligned">
+            {{ form.csrf_token }} {{form.username.label}}: {{form.username(placeholder = "user name", autofocus = "")}}
+            <br><br> {{form.fname.label}}: {{form.fname(placeholder = "First name")}}
+            <br><br> {{form.lname.label}}: {{form.lname(placeholder = "Last name")}}
+            <br><br> {{ form.hidden_tag() }} {{form.password.label}}: {{form.password(placeholder = "password")}}
+            <br>{{form.showPassword.label}}: {{form.showPassword}}
+            <br><br> {{form.registerbtn(class_="w3-button w3-round-large w3-border w3-border-red w3-khaki
+            w3-hover-purple")}}
+            <br><br>
+        </form>
+        <a href="login" class="w3-wide">Already have an account? <br> try to log in :)</a>
+    </div>
+    <script>
+        window.addEventListener("load", function () {
+            var checkbox = document.getElementById('{{form.showPassword.id}}');
+            var x = document.getElementById('{{ form.password.id }}');
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    x.type = 'text';
+                } else {
+                    x.type = 'password';
+                }
+            });
+        });
+    </script>
+</body>

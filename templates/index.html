@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>Map</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.10.0/css/ol.css"
+    type="text/css">
+<script src="https://openlayers.org/en/v3.20.1/build/ol.js" type="text/javascript"></script>
+
+<body style="background-image: url({{url_for('static', filename='hbg.jpg')}}); background-repeat: no-repeat;
+            background-attachment: fixed; background-size: 100% 10%;">
+    <header id="headerU">
+        <button onclick="location.href='/logout'" type="button">Log Off!</button>
+        <img src="https://media.istockphoto.com/vectors/user-profile-icon-vector-rainbow-colorstripe-pattern-avatar-portrait-vector-id1321447144?b=1&k=20&m=1321447144&s=170667a&w=0&h=m4n8DJsGjQ0KCNb1hyHDM-q8boLutGgDctNucypk49s="
+            alt="profile picture">
+        <div class="headtxt">
+            &nbspUser {{ session.username}}!&nbsp
+        </div>
+    </header>
+
+    <div id="mapChng" class="container">
+        <h2>Layers</h2>
+        <input id="osm" type="checkbox" name="layerRadioBTN" value="osm" checked><label for="osm">OSM Base
+            Map</label><br>
+        <input id="iranWMS" type="checkbox" name="layerRadioBTN" value="iranWMS" checked><label
+            for="iranWMS">Iran</label><br>
+        <input id="turkeyWMS" type="checkbox" name="layerRadioBTN" value="turkeyWMS"><label
+            for="turkeyWMS">Turkey</label><br>
+        <input id="AfghanistanWMS" type="checkbox" name="layerRadioBTN" value="AfghanistanWMS"><label
+            for="AfghanistanWMS">Afghanistan</label><br>
+    </div>
+    <div id="map" class="map"></div>
+
+    <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+    </div>
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</body>

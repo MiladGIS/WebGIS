@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<title>login page</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+    integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+
+<body style="background-image: url({{url_for('static', filename='bg.png')}});background-repeat: no-repeat;
+            background-attachment: fixed; background-size: 100% 105%;">
+
+    <div style=" margin: auto;text-align: center; margin-top: 10%;
+        display:table; background-color: aqua; padding: 1%;">
+        
+        <br> {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %}
+        {% if messages[0][0] == "warning" %}
+        <div class="w3-panel w3-yellow w3-round" style="display:inline-block;">
+            {{ messages[0][1]}}
+        </div>
+        {% elif messages[0][0] == 'success'%}
+        <div class="w3-panel w3-green w3-round" style="display:inline-block;">
+            {{ messages[0][1]}}
+        </div>
+        {% elif messages[0][0] == 'error' %}
+        <div class="w3-panel w3-red w3-round" style="display:inline-block;">
+            {{ messages[0][1]}}
+        </div>
+        {% endif %}{% endif %}{% endwith %}
+        <br>
+        <form method = "POST" class="pure-form pure-form-aligned">
+            {{ form.csrf_token }} {{form.username.label}}: {{form.username(placeholder = "user name", autofocus = "")}}
+            <br><br> {{form.password.label}}: {{form.password(placeholder = "password", class_="myInput",
+            type_="password")}}
+            <br>{{form.showPassword.label}}: {{form.showPassword}}
+            <br><br> {{form.loginbtn(class_="w3-button w3-round-large w3-border w3-border-red w3-khaki")}}
+            <br><br>
+        </form>
+        <a href="register" class="w3-wide">Don't have any account?<br> You can sign up for free!</a>
+    </div>
+    <script>
+        window.addEventListener("load", function () {
+            var checkbox = document.getElementById('{{form.showPassword.id}}');
+            var x = document.getElementById('{{ form.password.id }}');
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    x.type = 'text';
+                } else {
+                    x.type = 'password';
+                }
+            });
+        });
+    </script>
+</body>
